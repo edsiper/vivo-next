@@ -60,9 +60,9 @@ Let's use `curl`:
 curl -XPOST -H "Content-Type: application/json" -d '{"hello": "Calyptia!"}' http://127.0.0.1:9010
 ```
 
+## Known Issues or fixes needed
 
-
-## What is pending
-
-- UI > Segment data per type (log, metric, traces). All the renderer functionality assumes the data is a log. We need different data formatting per type.
-- Implement all the functionality from the original Vivo project that is missing here.
+- When ingesting 1 record with Curl, the UI is not rendering the content, but when sending a second record it gets rendered properly. This is a bug in the UI code.
+- [Vivo Exporter](https://docs.fluentbit.io/manual/v/dev-2.1/pipeline/outputs/vivo-exporter#streams-and-ids) support ranges which are [explained here](https://docs.fluentbit.io/manual/v/dev-2.1/pipeline/outputs/vivo-exporter#streams-and-ids) in the documentation. For some reason the HTTP requests done by the UI are not appending the query string parameters.
+- The UI tabs for metrics and traces should print just raw JSON. Note that for logs there is a expected schema where the UI use that to render the content. If metrics and traces are received, the rendering will fail due to the unexpected schema.
+- UI parity level with original Vivo UI version.
