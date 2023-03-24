@@ -9,6 +9,10 @@ This project is a new rewrite of [Vivo](https://github.com/calyptia/vivo) which 
 1. I don't know Go or JS/React, but I made my best effort to put the basics of the infrastructure into the next chapter of the Vivo project. 
 2. This won't work until https://github.com/fluent/fluent-bit/actions/runs/4507500973/jobs/7935338120 finish and publish the latest multi-arch Fluent Bit container image.
 
+#### VALIDATE Fluent Bit Version
+
+Make sure the Fluent Bit running inside `service` is at least the version `NIGHTLY_BUILD=2023-03-24-06_04_21`
+
 ## Why a rewrite ?
 
 Sorry, I cannot sleep well knowing that a simple UI viewer for Telemetry data needs more than 500MB in space between container images; we can do it better; let's keep it under 80MB (NOTE: the Dockerfile for the final image is based on debian bullseye, it's an improvement but it's not there yet, I don't have enough time to move it to distroless or similar)
