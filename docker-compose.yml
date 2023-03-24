@@ -5,7 +5,6 @@ services:
       context: service
       dockerfile: Dockerfile
     ports:
-      - "8000:3000"
       - "9000:24224"
       - "9010:9880"
       - "2025:2025"
@@ -14,7 +13,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "8000:3000"
     depends_on:
       - vivo-service
 
