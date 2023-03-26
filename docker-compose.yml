@@ -1,6 +1,6 @@
 version: '3'
 services:
-  vivo-service:
+  service:
     build:
       context: service
       dockerfile: Dockerfile
@@ -8,12 +8,12 @@ services:
       - "9000:24224"
       - "9010:9880"
       - "2025:2025"
-  vivo-frontend:
+  frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
       - "8000:3000"
     depends_on:
-      - vivo-service
+      - service
 
