@@ -67,3 +67,10 @@ curl -XPOST -H "Content-Type: application/json" -d '{"hello": "Calyptia!"}' http
 - The UI tabs for metrics and traces should print just raw JSON. Note that for logs there is a expected schema where the UI use that to render the content. If metrics and traces are received, the rendering will fail due to the unexpected schema.
 
 - UI parity level with original Vivo UI version.
+
+## Container images size
+
+| Vivo version | Uncompressed image sizes |
+|-|-|
+| vivo-next  | service: 84.38MB, frontend: 22.46MB, __Total: 106.84MB__  |
+| vivo (old) | __Total: 991.47MB__ |
