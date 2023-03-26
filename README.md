@@ -7,19 +7,19 @@ This project is a new rewrite of [Vivo](https://github.com/calyptia/vivo) which 
 ## Disclaimers
 
 1. I don't know Go or JS/React, but I made my best effort to put the basics of the infrastructure into the next chapter of the Vivo project. 
-2. This won't work until https://github.com/fluent/fluent-bit/actions/runs/4507500973/jobs/7935338120 finish and publish the latest multi-arch Fluent Bit container image.
 
-#### VALIDATE Fluent Bit Version
+2. VALIDATE Fluent Bit Version
 
-Make sure the Fluent Bit running inside `service` is at least the version `NIGHTLY_BUILD=2023-03-24-06_04_21`
+Make sure the Fluent Bit running inside `service` is at least the version `NIGHTLY_BUILD=2023-03-26-06_04_22...`
 
 ## Why a rewrite ?
 
-Sorry, I cannot sleep well knowing that a simple UI viewer for Telemetry data needs more than 500MB in space between container images; we can do it better; let's keep it under 80MB (NOTE: the Dockerfile for the final image is based on debian bullseye, it's an improvement but it's not there yet, I don't have enough time to move it to distroless or similar)
+- We need to support not only Logs type, also Metrics and Traces
+- Previous implementation in the containers it needs between 500MB-1GB in space, it takes a lot to deploy it. Let's keep it under 80MB.
 
-Also, this is not a full rewrite, I need help so others can step up and bring the missing functionality and styles to this new version.
+Another important factor, is that the previous version worked fine for logs, but now we ned support __metrics__ and __traces__, so we needed to extend the project scope. The previous version used to depend on Fluent Bit stdout to trap records output which is complex to extend for different types of telemetry data.
 
-The previous version worked fine for logs, but now we support metrics and traces in addition to logs, so we needed to extend the project scope. The previous version used to depend on Fluent Bit stdout to trap records output which is complex to extend for different types of telemetry data.
+Well, this is not a full rewrite, I need help so others can step up and bring the missing functionality and styles to this new version.
 
 This version uses a different approach and components:
 
@@ -63,6 +63,7 @@ curl -XPOST -H "Content-Type: application/json" -d '{"hello": "Calyptia!"}' http
 ## Known Issues or fixes needed
 
 - When ingesting 1 record with Curl, the UI is not rendering the content, but when sending a second record it gets rendered properly. This is a bug in the UI code.
-- [Vivo Exporter](https://docs.fluentbit.io/manual/v/dev-2.1/pipeline/outputs/vivo-exporter#streams-and-ids) support ranges which are [explained here](https://docs.fluentbit.io/manual/v/dev-2.1/pipeline/outputs/vivo-exporter#streams-and-ids) in the documentation. For some reason the HTTP requests done by the UI are not appending the query string parameters.
+
 - The UI tabs for metrics and traces should print just raw JSON. Note that for logs there is a expected schema where the UI use that to render the content. If metrics and traces are received, the rendering will fail due to the unexpected schema.
+
 - UI parity level with original Vivo UI version.
