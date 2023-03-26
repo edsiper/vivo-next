@@ -10,8 +10,6 @@ ENV CGO_ENABLED=0
 # Copy everything at /app
 COPY . /app
 
-COPY fluent-bit.conf /app
-
 # Build the go app
 RUN go build -o vivo-service .
 
@@ -24,10 +22,7 @@ WORKDIR /app
 
 ### Copy built binary application from 'builder' image
 COPY --from=service-builder /app/vivo-service .
-COPY --from=service-builder /app/fluent-bit.conf .
-#COPY --from=flb-download /fluent-bit/bin/fluent-bit /app
-
-ENV PATH="$PATH:/fluent-bit/bin/:/app/"
+COPY ./fluent-bit.conf .
 
 # Expose ports
 # ============
@@ -39,4 +34,6 @@ EXPOSE 24224
 EXPOSE 9880
 
 ### Run the binary application
-CMD ["/app/vivo-service"]
+ENV PATH="$PATH:/fluent-bit/bin/:/app/"
+
+ENTRYPOINT ["/app/vivo-service"]

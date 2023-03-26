@@ -32,9 +32,9 @@ func (cw *customWriter) Write(p []byte) (int, error) {
 
 func main() {
 	// Set up the command to run Fluent Bit
-	cmd := exec.Command("fluent-bit", "-c", "fluent-bit.conf")
+	cmd := exec.Command("fluent-bit", "-c", "/app/fluent-bit.conf")
 
-	// Redirect Fluent Bit's stdout to a custom writer
+	// Redirect Fluent Bit's stderr to a custom writer
 	cmd.Stderr = &customWriter{}
 
 	// Start Fluent Bit
