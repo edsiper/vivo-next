@@ -36,13 +36,13 @@ function App() {
 
         switch (endpoint) {
           case TABS.LOGS:
-            setLogs(parsedData);
+            setLogs(prevLogs => [...prevLogs, ...parsedData]);
             break;
           case TABS.METRICS:
-            setMetrics(parsedData);
+            setMetrics(prevMetrics => [...prevMetrics, ...parsedData]);
             break;
           case TABS.TRACES:
-            setTraces(parsedData);
+            setMetrics(prevTraces => [...prevTraces, ...parsedData]);
             break;
           default:
             break;
